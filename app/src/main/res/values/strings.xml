@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">CST438-Project1</string>
+    <string name="LogIn">Log in!</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="SignUp">SignUp</string>
+    <string name="introText">Welcome!</string>
+    <string name="returnOne">Go back.</string>
+    <string name="signUpText">Please Sign Up!</string>
+    <string name="addAssignment">Add Assignment</string>
+    <string name="loggedInHomeText">What would you like to do?</string>
+    <string name="addCourse">Add a Course</string>
+    <string name="updateAssignmentText">Update Assignment</string>
+    <string name="compute">Compute!</string>
+    <string name="deleteAssignment">Delete Assignment</string>
+    <string name="deleteCourse">Delete Course</string>
 </resources>

@@ -9,6 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DeleteCourse"></activity>
+        <activity android:name=".DeleteAssignment" />
+        <activity android:name=".Compute" />
+        <activity android:name=".UpdateAssignment" />
+        <activity android:name=".AddCourse" />
+        <activity android:name=".AddAssignment" />
+        <activity android:name=".LoggedInHome" />
+        <activity android:name=".SignUp" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
