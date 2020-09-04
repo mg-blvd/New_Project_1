@@ -44,19 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 .build()
                 .getUserDao();
 
-//        mAssignmentDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.ASSIGNMENT_TABLE)
-//                .allowMainThreadQueries()
-//                .build()
-//                .getAssignmentDao();
-//
-//        mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
-//                .allowMainThreadQueries()
-//                .build()
-//                .getCourseDao();
-
-
-//        Toast.makeText(this, "Everything was built correctly", Toast.LENGTH_SHORT).show();
-
         get_screen();
     }
 
