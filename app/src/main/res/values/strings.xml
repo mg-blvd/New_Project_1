@@ -14,4 +14,5 @@
     <string name="compute">Compute!</string>
     <string name="deleteAssignment">Delete Assignment</string>
     <string name="deleteCourse">Delete Course</string>
+    <string name="course_name">Course Name</string>
 </resources>

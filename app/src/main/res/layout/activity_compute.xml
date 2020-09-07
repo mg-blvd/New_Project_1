@@ -6,25 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Compute">
 
-    <TextView
-        android:id="@+id/computeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="177dp"
-        android:text="@string/compute"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/goBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="80dp"
         android:text="@string/returnOne"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rvCourses"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/rvCourses"
+        app:layout_constraintTop_toBottomOf="@+id/rvCourses" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCourses"
+        android:layout_width="293dp"
+        android:layout_height="411dp"
+        app:layout_constraintBottom_toTopOf="@+id/goBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="1"
+        tools:listitem="@layout/recycler_view_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

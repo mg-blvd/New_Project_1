@@ -10,98 +10,89 @@
         android:id="@+id/loggedInText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginEnd="199dp"
-        android:layout_marginBottom="56dp"
         android:text="@string/loggedInHomeText"
         app:layout_constraintBottom_toTopOf="@+id/deleteCOurse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.321"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginEnd="171dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="100dp"
         android:text="@string/returnOne"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAssignment" />
 
     <Button
         android:id="@+id/addAssignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="36dp"
         android:text="@string/addAssignment"
         app:layout_constraintBottom_toTopOf="@+id/backOne"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCourse" />
 
     <Button
         android:id="@+id/addCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/addCourse"
         app:layout_constraintBottom_toTopOf="@+id/addAssignment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateAssignmetn" />
 
     <Button
         android:id="@+id/updateAssignmetn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="20dp"
         android:text="@string/updateAssignmentText"
         app:layout_constraintBottom_toTopOf="@+id/addCourse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compute" />
 
     <Button
         android:id="@+id/compute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="161dp"
-        android:layout_marginBottom="26dp"
         android:text="@string/compute"
         app:layout_constraintBottom_toTopOf="@+id/updateAssignmetn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteAssignment" />
 
     <Button
         android:id="@+id/deleteAssignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginEnd="165dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/deleteAssignment"
         app:layout_constraintBottom_toTopOf="@+id/compute"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCOurse" />
 
     <Button
         android:id="@+id/deleteCOurse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginEnd="171dp"
-        android:layout_marginBottom="21dp"
         android:text="@string/deleteCourse"
         app:layout_constraintBottom_toTopOf="@+id/deleteAssignment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loggedInText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

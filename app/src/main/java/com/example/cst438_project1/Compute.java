@@ -1,6 +1,9 @@
 package com.example.cst438_project1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,20 +14,28 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cst438_project1.DbFiles.Course;
+import com.example.cst438_project1.DbFiles.CourseDao;
+import com.example.cst438_project1.DbFiles.StudentDatabase;
+
+import java.util.List;
+
 public class Compute extends AppCompatActivity {
     private static final String COMPUTE_ID = "com.example.cst438_project1.Compute";
-
-
-
+    private List<Course> mCourses;
     int id;
+    private CourseDao mCourseDao;
 
-    TextView computeText;
     Button goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compute);
+        mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
+                .allowMainThreadQueries()
+                .build()
+                .getCourseDao();
 
         get_screen();
     }
@@ -40,12 +51,20 @@ public class Compute extends AppCompatActivity {
     }
 
     public void get_screen(){
-        computeText = findViewById(R.id.computeText);
 
         Intent incoming = getIntent();
         id = incoming.getIntExtra(COMPUTE_ID, -1);
 
-        computeText.setText("Compute,USER ID:" + Integer.toString(id));
+//        computeText.setText("Compute,USER ID:" + Integer.toString(id));
+        RecyclerView rvCourse = (RecyclerView) findViewById(R.id.rvCourses);
+
+        mCourses = getmCourses();
+
+        CourseAdapter adapter = new CourseAdapter(mCourses);
+
+        rvCourse.setAdapter(adapter);
+
+        rvCourse.setLayoutManager(new LinearLayoutManager(this));
 
 
         goBack = findViewById(R.id.goBack);
@@ -56,6 +75,11 @@ public class Compute extends AppCompatActivity {
             }
         });
 
+    }
+
+    public List<Course> getmCourses(){
+        List<Course> userCourses = mCourseDao.getUserCourses(id);
+        return userCourses;
     }
 
     public static Intent ComputeIntent(Context context, int userId){
