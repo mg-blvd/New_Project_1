@@ -1,18 +1,17 @@
 package com.example.cst438_project1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.cst438_project1.DbFiles.Course;
 import com.example.cst438_project1.DbFiles.CourseDao;
@@ -55,10 +54,10 @@ public class Compute extends AppCompatActivity {
         Intent incoming = getIntent();
         id = incoming.getIntExtra(COMPUTE_ID, -1);
 
-//        computeText.setText("Compute,USER ID:" + Integer.toString(id));
+
         RecyclerView rvCourse = (RecyclerView) findViewById(R.id.rvCourses);
 
-        mCourses = getmCourses();
+        mCourses = getCourses();
 
         CourseAdapter adapter = new CourseAdapter(mCourses);
 
@@ -77,7 +76,7 @@ public class Compute extends AppCompatActivity {
 
     }
 
-    public List<Course> getmCourses(){
+    public List<Course> getCourses() {
         List<Course> userCourses = mCourseDao.getUserCourses(id);
         return userCourses;
     }

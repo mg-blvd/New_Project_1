@@ -4,29 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Compute">
+    tools:context=".AssignmentView">
 
     <Button
-        android:id="@+id/goBack"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/returnOne"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/rvCourses"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/rvCourses"
-        app:layout_constraintTop_toBottomOf="@+id/rvCourses" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCourses"
-        android:layout_width="369dp"
-        android:layout_height="405dp"
-        app:layout_constraintBottom_toTopOf="@+id/goBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="1"
-        tools:listitem="@layout/recycler_view_courses" />
+        app:layout_constraintTop_toBottomOf="@+id/rvAssignments" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAssignments"
+        android:layout_width="369dp"
+        android:layout_height="405dp"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentCourseName"
+        tools:itemCount="1"
+        tools:listitem="@layout/recycler_view_assignments" />
+
+    <TextView
+        android:id="@+id/currentCourseName"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:text="@string/course_name"
+        app:layout_constraintBottom_toTopOf="@+id/rvAssignments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

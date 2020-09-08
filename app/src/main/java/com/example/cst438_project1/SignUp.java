@@ -1,8 +1,5 @@
 package com.example.cst438_project1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.cst438_project1.DbFiles.StudentDatabase;
 import com.example.cst438_project1.DbFiles.User;
