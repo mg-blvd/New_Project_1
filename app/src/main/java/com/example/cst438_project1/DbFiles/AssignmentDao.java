@@ -20,9 +20,9 @@ public interface AssignmentDao {
     @Update
     void update(Assignment assignment);
 
-    @Query("SELECT * from assignment_table WHERE studentId == :userId")
+    @Query("SELECT * from assignment_table WHERE studentId = :userId")
     List<Assignment> getUserAllAssignments(Integer userId);
 
-    @Query("SELECT * from assignment_table WHERE studentId == :userId AND courseId == :courseId")
+    @Query("SELECT * from assignment_table WHERE studentId = :userId AND courseId = :courseId")
     List<Assignment> getUserSpecificCourseAssignments(Integer userId, Integer courseId);
 }
