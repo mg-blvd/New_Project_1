@@ -45,7 +45,29 @@ public class Assignment {
         return courseId;
     }
 
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public void setMaxScore(Double maxScore) {
+        this.maxScore = maxScore;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
     public Integer getStudentId() {
         return studentId;
+
+
     }
 }

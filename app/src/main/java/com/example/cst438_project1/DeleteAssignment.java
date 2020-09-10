@@ -1,6 +1,8 @@
 package com.example.cst438_project1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Database;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cst438_project1.DbFiles.Course;
+import com.example.cst438_project1.DbFiles.CourseDao;
+import com.example.cst438_project1.DbFiles.StudentDatabase;
+
 public class DeleteAssignment extends AppCompatActivity {
     private static final String DELETE_ASSIGNMENT_ID = "com.example.cst438_project1.DeleteAssignment";
 
     int id;
+    CourseDao mCourseDao;
 
     TextView deleteAssignmentText;
     Button goBack;
@@ -25,7 +32,17 @@ public class DeleteAssignment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_assignment);
 
+        mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
+                .allowMainThreadQueries()
+                .build()
+                .getCourseDao();
+
+
+
+
         get_screen();
+
+
     }
 
     public void toast_maker(String str){
