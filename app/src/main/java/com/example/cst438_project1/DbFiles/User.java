@@ -1,7 +1,10 @@
 package com.example.cst438_project1.DbFiles;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.ArrayList;
 
 @Entity(tableName = "users_table")
 public class User {
@@ -29,5 +32,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
