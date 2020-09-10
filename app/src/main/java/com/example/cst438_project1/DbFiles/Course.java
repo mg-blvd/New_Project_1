@@ -1,7 +1,10 @@
 package com.example.cst438_project1.DbFiles;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.ArrayList;
 
 @Entity(tableName = "course_table")
 public class Course {
@@ -11,6 +14,12 @@ public class Course {
     private int courseId;
     private int studentId;
 
+    public Course(String courseName, int studentId){
+        this.courseName = courseName;
+        this.studentId = studentId;
+    }
+
+    @Ignore
     public Course(String courseName, double currentGrade, int studentId) {
         this.courseName = courseName;
         this.currentGrade = currentGrade;
@@ -31,6 +40,10 @@ public class Course {
 
     public double getCurrentGrade() {
         return currentGrade;
+    }
+
+    public void setCurrentGrade(double currentGrade) {
+        this.currentGrade = currentGrade;
     }
 
     public int getStudentId() {
