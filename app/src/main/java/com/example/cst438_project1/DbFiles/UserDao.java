@@ -14,12 +14,12 @@ public interface UserDao {
     @Delete
     void delete(User note);
 
-    @Query("SELECT password FROM users_table WHERE username == :username")
+    @Query("SELECT password FROM users_table WHERE username = :username")
     String getUserPassword(String username);
 
-    @Query("SELECT * from users_table WHERE username == :username")
+    @Query("SELECT * from users_table WHERE username = :username")
     User getUserWithUsername(String username);
 
-    @Query("SELECT id from users_table where username == :username")
+    @Query("SELECT id from users_table where username = :username")
     int getUserIdFromUsername(String username);
 }

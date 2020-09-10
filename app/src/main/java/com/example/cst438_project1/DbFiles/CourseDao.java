@@ -20,6 +20,6 @@ public interface CourseDao {
     @Update
     void update(Course course);
 
-    @Query("SELECT * FROM course_table WHERE studentId == :userId")
+    @Query("SELECT * FROM course_table WHERE studentId = :userId")
     List<Course> getUserCourses(int userId);
 }
