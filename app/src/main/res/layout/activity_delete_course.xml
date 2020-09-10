@@ -25,4 +25,28 @@
         android:text="@string/returnOne"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerCourses"
+        android:layout_width="364dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:drawable/btn_dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goBack" />
+
+    <Button
+        android:id="@+id/buttonDeleteCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="167dp"
+        android:text="@string/deleteCourse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCourses" />
 </androidx.constraintlayout.widget.ConstraintLayout>

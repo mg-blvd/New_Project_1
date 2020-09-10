@@ -10,9 +10,9 @@
         android:id="@+id/updateAssignmentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="115dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="144dp"
         android:text="@string/updateAssignmentText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,4 +27,73 @@
         android:text="@string/returnOne"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerCourses"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="1dp"
+        android:background="@android:drawable/btn_dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goBack" />
+
+    <Spinner
+        android:id="@+id/spinnerAssignments"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="1dp"
+        android:background="@android:drawable/btn_dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCourses" />
+
+    <EditText
+        android:id="@+id/assignmentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="77dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toEndOf="@+id/buttonUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAssignments" />
+
+    <EditText
+        android:id="@+id/assignmentGot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/buttonUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/assignmentName" />
+
+    <EditText
+        android:id="@+id/assignmentTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/buttonUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/assignmentGot" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="116dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="107dp"
+        android:text="@string/updateAssignmentText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAssignments" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
