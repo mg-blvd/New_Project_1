@@ -16,4 +16,5 @@
     <string name="deleteCourse">Delete Course</string>
     <string name="course_name">Course Name</string>
     <string name="confirm">Confirm</string>
+    <string name="chooseCourseLabel">Choose a course!</string>
 </resources>

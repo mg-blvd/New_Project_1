@@ -9,13 +9,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cst438_project1.DbFiles.Course;
 import com.example.cst438_project1.DbFiles.CourseDao;
 import com.example.cst438_project1.DbFiles.StudentDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteAssignment extends AppCompatActivity {
     private static final String DELETE_ASSIGNMENT_ID = "com.example.cst438_project1.DeleteAssignment";
@@ -25,6 +30,7 @@ public class DeleteAssignment extends AppCompatActivity {
 
     TextView deleteAssignmentText;
     Button goBack;
+    Spinner courseDropDown;
 
 
     @Override
@@ -72,7 +78,21 @@ public class DeleteAssignment extends AppCompatActivity {
             }
         });
 
+        courseDropDown = findViewById(R.id.deleteCourseDropdown);
+        populateDropdown();
         /// make the button in the loggedin and stuff
+    }
+
+    private void populateDropdown() {
+        List<String> dropdownVals = new ArrayList<>();
+        dropdownVals.add("History");
+        dropdownVals.add("Math");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, dropdownVals);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        courseDropDown.setAdapter(dataAdapter);
     }
 
 
