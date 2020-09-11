@@ -1,5 +1,7 @@
 package com.example.cst438_project1.DbFiles;
 
+import android.util.Pair;
+
 import java.util.List;
 
 import androidx.room.Dao;
@@ -22,4 +24,7 @@ public interface CourseDao {
 
     @Query("SELECT * FROM course_table WHERE studentId = :userId")
     List<Course> getUserCourses(int userId);
+
+    @Query("SELECT courseName, courseId FROM course_table WHERE studentId = :userId")
+    List<CourseBasicInfo> getUserCourseBasicInfo(Integer userId);
 }
