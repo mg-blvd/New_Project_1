@@ -1,14 +1,14 @@
 package com.example.cst438_project1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,10 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cst438_project1.DbFiles.Course;
+import com.example.cst438_project1.DbFiles.Assignment;
+import com.example.cst438_project1.DbFiles.AssignmentDao;
 import com.example.cst438_project1.DbFiles.CourseBasicInfo;
 import com.example.cst438_project1.DbFiles.CourseDao;
 import com.example.cst438_project1.DbFiles.StudentDatabase;
+import com.example.cst438_project1.RecyclerViewFiles.DeleteAssignmentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,16 @@ public class DeleteAssignment extends AppCompatActivity {
 
     int id;
     CourseDao mCourseDao;
+    AssignmentDao mAssignmentDao;
     List<CourseBasicInfo> mCourses;
+    List<Assignment> mAssignments;
 
     TextView deleteAssignmentText;
     Button goBack;
     Spinner courseDropDown;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
 
     @Override
@@ -41,14 +48,8 @@ public class DeleteAssignment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_assignment);
 
-        mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
-                .allowMainThreadQueries()
-                .build()
-                .getCourseDao();
-
+        setupDaos();
         get_screen();
-
-
     }
 
     public void toast_maker(String str){
@@ -82,6 +83,25 @@ public class DeleteAssignment extends AppCompatActivity {
         mCourses = mCourseDao.getUserCourseBasicInfo(id);
         populateDropdown();
         /// make the button in the loggedin and stuff
+
+        mRecyclerView = findViewById(R.id.deleteCourseRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        populateRecyclerAdapter();
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void setupDaos() {
+        mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
+                .allowMainThreadQueries()
+                .build()
+                .getCourseDao();
+
+        mAssignmentDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.ASSIGNMENT_TABLE)
+                .allowMainThreadQueries()
+                .build()
+                .getAssignmentDao();
     }
 
     private void populateDropdown() {
@@ -92,6 +112,19 @@ public class DeleteAssignment extends AppCompatActivity {
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courseDropDown.setAdapter(dataAdapter);
+    }
+
+    private void populateRecyclerAdapter() {
+        String courseName = courseDropDown.getSelectedItem().toString();
+        Integer courseId = 1;
+        for(CourseBasicInfo course : mCourses) {
+            if(course.getCourseId().equals(courseName)) {
+                courseId = course.getCourseId();
+            }
+        }
+
+        mAssignments = mAssignmentDao.getUserSpecificCourseAssignments(id, courseId);
+        mAdapter = new DeleteAssignmentAdapter(mAssignments);
     }
 
     private List<String> extractCourseNamesToList() {
