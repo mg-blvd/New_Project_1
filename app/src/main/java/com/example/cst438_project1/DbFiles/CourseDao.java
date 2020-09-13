@@ -27,4 +27,7 @@ public interface CourseDao {
 
     @Query("SELECT courseName, courseId FROM course_table WHERE studentId = :userId")
     List<CourseBasicInfo> getUserCourseBasicInfo(Integer userId);
+
+    @Query("SELECT * FROM course_table WHERE courseId = :courseId")
+    Course getCourseFromId(Integer courseId);
 }

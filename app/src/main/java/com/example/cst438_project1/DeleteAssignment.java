@@ -1,15 +1,18 @@
 package com.example.cst438_project1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.cst438_project1.DbFiles.Assignment;
 import com.example.cst438_project1.DbFiles.AssignmentDao;
+import com.example.cst438_project1.DbFiles.Course;
 import com.example.cst438_project1.DbFiles.CourseBasicInfo;
 import com.example.cst438_project1.DbFiles.CourseDao;
 import com.example.cst438_project1.DbFiles.StudentDatabase;
@@ -39,7 +43,7 @@ public class DeleteAssignment extends AppCompatActivity {
     Button goBack;
     Spinner courseDropDown;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private DeleteAssignmentAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -79,18 +83,49 @@ public class DeleteAssignment extends AppCompatActivity {
             }
         });
 
+
+        /// make the button in the loggedin and stuff
+        initializeCourseSpinner();
+        initializeRecyclerView();
+
+    }
+
+    private void initializeCourseSpinner() {
         courseDropDown = findViewById(R.id.deleteCourseDropdown);
         mCourses = mCourseDao.getUserCourseBasicInfo(id);
-        populateDropdown();
-        /// make the button in the loggedin and stuff
 
+        courseDropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                getAssignments();
+                mAdapter.onRefreshAdapter(mAssignments);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        populateDropdown();
+    }
+
+    private void initializeRecyclerView() {
         mRecyclerView = findViewById(R.id.deleteCourseRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        populateRecyclerAdapter();
+        createRecyclerAdapter();
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new DeleteAssignmentAdapter.OnItemClickeListener() {
+            @Override
+            public void onItemClick(int position) {
+                Assignment pickedAssignment = mAssignments.get(position);
+                onDeleteAlertDialog(pickedAssignment);
+            }
+        });
     }
+
 
     private void setupDaos() {
         mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
@@ -114,16 +149,19 @@ public class DeleteAssignment extends AppCompatActivity {
         courseDropDown.setAdapter(dataAdapter);
     }
 
-    private void populateRecyclerAdapter() {
+    private void getAssignments() {
         String courseName = courseDropDown.getSelectedItem().toString();
         Integer courseId = 1;
         for(CourseBasicInfo course : mCourses) {
-            if(course.getCourseId().equals(courseName)) {
+            if(course.getCourseName().equals(courseName)) {
                 courseId = course.getCourseId();
             }
         }
-
         mAssignments = mAssignmentDao.getUserSpecificCourseAssignments(id, courseId);
+    }
+
+    private void createRecyclerAdapter() {
+        getAssignments();
         mAdapter = new DeleteAssignmentAdapter(mAssignments);
     }
 
@@ -142,5 +180,43 @@ public class DeleteAssignment extends AppCompatActivity {
         Intent intent = new Intent(context, DeleteAssignment.class);
         intent.putExtra(DELETE_ASSIGNMENT_ID, userId);
         return intent;
+    }
+
+    /*
+    referenced from:
+    https://developer.android.com/guide/topics/ui/dialogs
+     */
+    private void onDeleteAlertDialog(final Assignment pickedAssignment) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to delete " +
+                        pickedAssignment.getAssignmentName() + "?")
+                .setTitle("Delete Assignment Alert");
+
+        builder.setPositiveButton(R.string.delete_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                toast_maker("Assignment was deleted");
+                deleteAnAssignment(pickedAssignment);
+                Intent intent = LoggedInHome.LoggedInIntent(getParent(), id);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.delete_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                toast_maker("Assignment was not deleted.");
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void deleteAnAssignment(Assignment assignment) {
+        int courseId = assignment.getCourseId();
+        Course courseToModify = mCourseDao.getCourseFromId(courseId);
+        mAssignmentDao.delete(assignment);
+        List<Assignment> assignmentList = mAssignmentDao.getUserSpecificCourseAssignments(id, courseId);
+        Utility.recalculateGrade(courseToModify, assignmentList, mCourseDao);
     }
 }
