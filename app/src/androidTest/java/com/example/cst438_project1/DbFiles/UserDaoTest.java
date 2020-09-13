@@ -37,7 +37,8 @@ public class UserDaoTest {
         userDao.insert(user);
 
         User findUser = userDao.getUserWithUsername(user.getUsername());
-        assertEquals(findUser, user);
+        assertEquals(user.getUsername(), findUser.getUsername());
+        assertEquals(user.getPassword(), findUser.getPassword());
     }
 
     @Test
@@ -46,7 +47,8 @@ public class UserDaoTest {
         userDao.insert(user);
 
         User findUser = userDao.getUserWithUsername(user.getUsername());
-        assertEquals(user, findUser);
+        assertEquals(user.getUsername(), findUser.getUsername());
+        assertEquals(user.getPassword(), findUser.getPassword());
 
         userDao.delete(findUser);
         User deletedUser = userDao.getUserWithUsername(findUser.getUsername());
@@ -74,8 +76,11 @@ public class UserDaoTest {
                 userDao.getUserWithUsername(u2.getUsername())
         };
 
-        assertEquals(u1, userArr[0]);
-        assertEquals(u2, userArr[1]);
+        assertEquals(u1.getUsername(), userArr[0].getUsername());
+        assertEquals(u1.getPassword(), userArr[0].getPassword());
+        assertEquals(u2.getUsername(), userArr[1].getUsername());
+        assertEquals(u2.getPassword(), userArr[1].getPassword());
+
     }
 
     @Test

@@ -59,7 +59,9 @@ public class CourseDaoTest {
         Course c1 = new Course("English", user.getId());
         courseDao.insert(c1);
         List<Course> listCourses = courseDao.getUserCourses(user.getId());
-        assertEquals(c1, listCourses.get(0));
+        Course returnedCourse = listCourses.get(0);
+        assertEquals(c1.getStudentId(), returnedCourse.getStudentId());
+        assertEquals(c1.getCourseName(), returnedCourse.getCourseName());
 
         courseDao.delete(listCourses.get(0));
         listCourses = courseDao.getUserCourses(user.getId());
