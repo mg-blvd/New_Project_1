@@ -5,6 +5,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Entity(tableName = "course_table")
 public class Course {
@@ -48,5 +49,20 @@ public class Course {
 
     public int getStudentId() {
         return studentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Double.compare(course.currentGrade, currentGrade) == 0 &&
+                studentId == course.studentId &&
+                courseName.equals(course.courseName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseName, currentGrade, studentId);
     }
 }
