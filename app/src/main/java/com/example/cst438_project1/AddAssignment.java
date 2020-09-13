@@ -122,6 +122,10 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
 
                 mAssignmentDao.insert(newAssignment);
                 toast_maker(textToString(assignmentName) + " added");
+
+                //Update course grade
+                List<Assignment> assignments = mAssignmentDao.getUserSpecificCourseAssignments(studentID, courseID);
+                Utility.recalculateGrade(course, assignments, mCourseDao);
             }
         });
 
