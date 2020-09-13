@@ -3,6 +3,8 @@ package com.example.cst438_project1.DbFiles;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "assignment_table")
 public class Assignment {
     private String assignmentName;
@@ -47,5 +49,22 @@ public class Assignment {
 
     public Integer getStudentId() {
         return studentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Assignment that = (Assignment) o;
+        return assignmentName.equals(that.assignmentName) &&
+                score.equals(that.score) &&
+                maxScore.equals(that.maxScore) &&
+                courseId.equals(that.courseId) &&
+                studentId.equals(that.studentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(assignmentName, score, maxScore, courseId, studentId);
     }
 }
