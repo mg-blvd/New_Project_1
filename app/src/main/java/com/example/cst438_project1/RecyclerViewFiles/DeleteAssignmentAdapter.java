@@ -17,6 +17,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * This is the adapter for the RecyclerView in the DeleteAssignment activity.
+ * @author Misael Guijarro
+ */
 public class DeleteAssignmentAdapter extends RecyclerView.Adapter<DeleteAssignmentAdapter.ExampleViewHolder> {
     private List<Assignment> mAssignments;
     private OnItemClickeListener mListener;

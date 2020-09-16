@@ -1,11 +1,9 @@
 package com.example.cst438_project1.DbFiles;
 
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
-import java.util.ArrayList;
 import java.util.Objects;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users_table")
 public class User {

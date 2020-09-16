@@ -14,6 +14,4 @@ public abstract class StudentDatabase extends RoomDatabase {
     public abstract AssignmentDao getAssignmentDao();
     public abstract CourseDao getCourseDao();
 
-
-
 }
