@@ -27,14 +27,14 @@ import java.util.List;
 public class DeleteCourse extends AppCompatActivity {
     private static final String DELETE_COURSE_ID = "com.example.cst438_project1.DeleteCourse";
 
-    int id;
+    int id; // The current user's id
 
     private CourseDao mCourseDao;
     private AssignmentDao mAssignmentDao;
 
     TextView deleteCourseText;
 
-    Spinner spinner; // otherwise known as a drop down
+    Spinner spinner; // Where courses will be placed to be chosen from (a.k.a. a drop down)
 
     Button goBack;
     Button deleteCourse;
@@ -47,12 +47,13 @@ public class DeleteCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_course);
 
+        //Connecting to Course DAO
         mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
                 .allowMainThreadQueries()
                 .build()
                 .getCourseDao();
 
-
+        // Connecting to Assignment DAO
         mAssignmentDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.ASSIGNMENT_TABLE)
                 .allowMainThreadQueries()
                 .build()
@@ -62,45 +63,19 @@ public class DeleteCourse extends AppCompatActivity {
 
     }
 
+    // Creates toasts with str
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
-    public void make_random(){
-        List<Course> randoms = new ArrayList<Course>();
-        List<Assignment> randoms_assignments = new ArrayList<Assignment>();
-
-        for(int i = 0; i < 2; i++){
-            randoms.add(new Course("random" + Integer.toString(i)+ Calendar.getInstance().getTime().toString(), Double.valueOf(0.75), id));
-            randoms_assignments.add(new Assignment("assign" + Calendar.getInstance().getTime().toString(), Double.valueOf(3), Double.valueOf(4), Integer.valueOf(i), Integer.valueOf(id)));
-        }
-
-        for(Course course: randoms){
-            mCourseDao.insert(course);
-        }
-        for(Assignment assignment: randoms_assignments){
-            mAssignmentDao.insert(assignment);
-        }
-
-        List<Course> get_courses = mCourseDao.getUserCourses(id);
-        for(Course course: get_courses){
-            Log.i("Course name", course.getCourseName());
-        }
-        List<Assignment> get_assignments = mAssignmentDao.getUserAllAssignments(id);
-        for(Assignment assignment: get_assignments){
-            Log.i("Assignments", assignment.getAssignmentName() +" course id is " + assignment.getCourseId());
-        }
-//        Log.i("is the get_courses empty?", String.valueOf(get_courses.isEmpty()));
-
-
-    }
-
+    // Changes view to the Logged In view
     public void to_logged_in_screen(int userId){
         Intent intent = LoggedInHome.LoggedInIntent(DeleteCourse.this, userId);
         Log.i("Moving view","From DeleteCourse to LoggedIn");
         startActivity(intent);
     }
 
+    // Populates the public courses spinner based on user's id
     public void populate_spinner(){
         items = new ArrayList<String>();
         courses = mCourseDao.getUserCourses(id);
@@ -127,14 +102,17 @@ public class DeleteCourse extends AppCompatActivity {
 
     }
 
+    // Will return the index of the selected value
     public int get_dropdown_value(){
         return spinner.getSelectedItemPosition();
     }
 
+    // Will return the Id of the course
     public int get_course_id(int val){
         return courses.get(val).getCourseId();
     }
 
+    // Will delete all assignments related to the course being deleted
     public void delete_assignments(int userId, int courseId){
         List<Assignment> assignments = mAssignmentDao.getUserSpecificCourseAssignments(userId, courseId);
 
@@ -144,24 +122,21 @@ public class DeleteCourse extends AppCompatActivity {
         toast_maker("Deleted all related assignments");
     }
 
+    // Deletes the wanted course from the spinner option
     public void delete_course(int index){
         mCourseDao.delete(courses.get(index));
         toast_maker("Deleted the course");
     }
 
+    // Obtains all attributes from the view and attaches corresponding functionality
     public void get_screen(){
         deleteCourseText = findViewById(R.id.deleteCourseText);
 
         Intent incoming = getIntent();
         id = incoming.getIntExtra(DELETE_COURSE_ID, -1);
 
-//        make_random();
-//        deleteCourseText.setText("Delete Course,USER ID:" + Integer.toString(id));
-
         spinner = findViewById(R.id.spinnerCourses);
         populate_spinner();
-
-        // populate spinner
 
         goBack = findViewById(R.id.goBack);
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +160,7 @@ public class DeleteCourse extends AppCompatActivity {
 
     }
 
+    // The intent for the current activity
     public static Intent DeleteCourseIntent(Context context, int userId){
         Intent intent = new Intent(context, DeleteCourse.class);
         intent.putExtra(DELETE_COURSE_ID, userId);
