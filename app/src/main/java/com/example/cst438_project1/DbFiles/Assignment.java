@@ -67,4 +67,16 @@ public class Assignment {
     public int hashCode() {
         return Objects.hash(assignmentName, score, maxScore, courseId, studentId);
     }
+
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public void setMaxScore(Double maxScore) {
+        this.maxScore = maxScore;
+    }
 }
