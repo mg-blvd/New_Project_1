@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class LoggedInHome extends AppCompatActivity {
 
-    private static final String LOGGED_IN_ID = "com.example.cst438_project1.LoggedInHome";
+    public static final String LOGGED_IN_ID = "com.example.cst438_project1.LoggedInHome";
 
     TextView loggedInText;
     Integer id; // Current user's Id
