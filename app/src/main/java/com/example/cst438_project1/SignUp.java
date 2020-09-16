@@ -56,8 +56,8 @@ public class SignUp extends AppCompatActivity {
     }
 
     // Determines if the user's inputs are valid for user creation
-    public boolean input_check(){
-        if(userName.getText().toString().length() < 4 || passWord.getText().toString().length() < 4){
+    public boolean input_check(String username, String password){
+        if(username.length() < 4 || password.length() < 4){
             signUpText.setText("Please make sure there are at least four characters in each field");
             toast_maker("Please make sure there are at least four characters in each field");
             return false;
@@ -94,7 +94,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // check if user can sign up
-                if(input_check()){
+                if(input_check(userName.getText().toString(), passWord.getText().toString())){
                     insert_user();
                     toast_maker("Welcome, " + userName.getText().toString());
                     return_home(); // then we go back to the Main activity
