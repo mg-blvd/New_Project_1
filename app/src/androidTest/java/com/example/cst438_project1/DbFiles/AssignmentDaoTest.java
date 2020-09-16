@@ -152,4 +152,24 @@ public class AssignmentDaoTest {
     public Assignment populateAssignments(int userID, int courseID, String name, double score) {
         return new Assignment(name, score, 100.0, courseID, userID);
     }
+
+    /**
+     * Tester to make sure assignments get updated in the dao
+     */
+    @Test
+    public void testingTheUpdate(){
+        Assignment assignmentToUpdate = new Assignment("UpdateTesting", 4.5,
+                5.0, 999, 500);
+        assignmentDao.insert(assignmentToUpdate);
+
+        List<Assignment> assignments = assignmentDao.getUserAllAssignments(500);
+        assignmentToUpdate = assignments.get(0);
+        assignmentToUpdate.setMaxScore(99.0);
+        assignmentToUpdate.setAssignmentName("It should be updated!");
+        assignmentToUpdate.setScore(22.5);
+        assignmentDao.update(assignmentToUpdate);
+
+        assignments = assignmentDao.getUserAllAssignments(500);
+        assertEquals(assignmentToUpdate, assignments.get(0));
+    }
 }
