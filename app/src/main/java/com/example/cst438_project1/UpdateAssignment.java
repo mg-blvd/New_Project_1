@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateAssignment extends AppCompatActivity {
-    private static final String UPDATE_ASSIGNMENT_ID = "com.example.cst438_project1.UpdateAssignment";
+    public static final String UPDATE_ASSIGNMENT_ID = "com.example.cst438_project1.UpdateAssignment";
 
-    int id;
+    int id; // The current user's Id
 
     TextView updateAssignmentText;
     Button goBack;
@@ -41,7 +41,7 @@ public class UpdateAssignment extends AppCompatActivity {
     private CourseDao mCourseDao;
     private AssignmentDao mAssignmentDao;
 
-    Spinner spinnerCourses; // otherwise known as a drop down
+    Spinner spinnerCourses;
     Spinner spinnerAssignments;
 
     Assignment currentAssignment = null;
@@ -57,12 +57,13 @@ public class UpdateAssignment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_assignment);
 
+        // Connecting to the Course DAO
         mCourseDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.COURSE_TABLE)
                 .allowMainThreadQueries()
                 .build()
                 .getCourseDao();
 
-
+        // Connecting to the assignment DAO
         mAssignmentDao = Room.databaseBuilder(this, StudentDatabase.class, StudentDatabase.ASSIGNMENT_TABLE)
                 .allowMainThreadQueries()
                 .build()
@@ -71,16 +72,19 @@ public class UpdateAssignment extends AppCompatActivity {
         get_screen();
     }
 
+    // Creates toasts from String
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
+    // Changes view to the Logged In Activity
     public void to_logged_in_screen(int userId){
         Intent intent = LoggedInHome.LoggedInIntent(UpdateAssignment.this, userId);
         Log.i("Moving view","From UpdateAssignment to LoggedIn");
         startActivity(intent);
     }
 
+    // Populates the courses spinner based on the user's id
     public void populate_courses(int id){
         coursesNames = new ArrayList<String>();
         courses = mCourseDao.getUserCourses(id);
@@ -104,6 +108,7 @@ public class UpdateAssignment extends AppCompatActivity {
         }
     }
 
+    // Populates the assignments spinner
     public void populate_assignments(int userId, int courseId){
         assignmentsNames = new ArrayList<String>();
         assignments = mAssignmentDao.getUserSpecificCourseAssignments(userId, courseId);
@@ -125,24 +130,28 @@ public class UpdateAssignment extends AppCompatActivity {
 
     }
 
+    // Updates the assignment chosen
     public void set_current_assignment(Assignment assignment){
         currentAssignment = assignment;
     }
 
+    // Populates the edit fields for the user to update
     public void set_edits(){
         assignName.setText(currentAssignment.getAssignmentName());
         assignGot.setText(Double.toString(currentAssignment.getScore()));
         assignTotal.setText(Double.toString(currentAssignment.getMaxScore()));
     }
 
-    public boolean check_if_possible(){
-        if(currentAssignment == null){
+    // Checks if the user has an assignment to access
+    public boolean check_if_possible(Assignment current){
+        if(current == null){
             toast_maker("Sorry no assignment is available");
             return false;
         }
         return true;
     }
 
+    // Updates the assignment object based on the user's edited fields
     public void updateAssignment(){
         currentAssignment.setAssignmentName(assignName.getText().toString());
         currentAssignment.setScore(Double.parseDouble(assignGot.getText().toString()));
@@ -160,6 +169,7 @@ public class UpdateAssignment extends AppCompatActivity {
         Utility.recalculateGrade(getCourse, assignments, mCourseDao);
     }
 
+    // Gets view attributes and gives them functionality
     public void get_screen(){
         updateAssignmentText = findViewById(R.id.updateAssignmentText);
         assignName = findViewById(R.id.assignmentName);
@@ -169,8 +179,6 @@ public class UpdateAssignment extends AppCompatActivity {
 
         Intent incoming = getIntent();
         id = incoming.getIntExtra(UPDATE_ASSIGNMENT_ID, -1);
-
-        updateAssignmentText.setText("UPDATE ASSIGNMENT USER ID:" + Integer.toString(id));
 
         goBack = findViewById(R.id.goBack);
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -188,8 +196,7 @@ public class UpdateAssignment extends AppCompatActivity {
         spinnerCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                toast_maker("something selected!"+ Integer.toString(i)); // i here is the index value
-//                courses.get(i); // so this is the object in question
+                toast_maker("Something selected! #"+ Integer.toString(i)); // i here is the index value
                 Log.i("The name of the course is ", coursesNames.get(i) + " which is at index " + Integer.toString(i));
                 Log.i("On courses it is ", courses.get(i).getCourseName()); // they are the same, just needed to make sure
 
@@ -220,7 +227,7 @@ public class UpdateAssignment extends AppCompatActivity {
         assignUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(check_if_possible()){
+                if(check_if_possible(currentAssignment)){
                     updateAssignment();
                     toast_maker("Assignment has being updated!");
                     to_logged_in_screen(id);
@@ -231,6 +238,7 @@ public class UpdateAssignment extends AppCompatActivity {
 
     }
 
+    // The current activity's intent
     public static Intent UpdateAssignmentIntent(Context context, int userId){
         Intent intent = new Intent(context, UpdateAssignment.class);
         intent.putExtra(UPDATE_ASSIGNMENT_ID, userId);
