@@ -1,6 +1,7 @@
 package com.example.cst438_project1.DbFiles;
 
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 
 /**
@@ -20,5 +21,15 @@ public class CourseBasicInfo {
 
     public Integer getCourseId() {
         return courseId;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        CourseBasicInfo course = (CourseBasicInfo) obj;
+
+        return getCourseName().equals(course.getCourseName()) &&
+                getCourseId().equals(course.getCourseId());
     }
 }

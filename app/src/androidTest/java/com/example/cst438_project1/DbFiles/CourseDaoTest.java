@@ -106,4 +106,57 @@ public class CourseDaoTest {
         assertEquals(c2, listCourses.get(1));
         assertEquals(c3, listCourses.get(2));
     }
+
+    /**
+     * Testing the basic course info return
+     * @author Misael Guijarro
+     */
+    @Test
+    public void getUserCourseBasicInfo() {
+        User user = new User("basic_tester", "basic");
+        userDao.insert(user);
+
+        Course c1 = new Course("example1", user.getId());
+        Course c2 = new Course("example2", user.getId());
+        Course c3 = new Course("example3", user.getId());
+        courseDao.insert(c1);
+        courseDao.insert(c2);
+        courseDao.insert(c3);
+
+        List<Course> fullCourseInfo = courseDao.getUserCourses(user.getId());
+        List<CourseBasicInfo> basicInfos = courseDao.getUserCourseBasicInfo(user.getId());
+
+        for(int i = 0; i < 3; i++) {
+            Course curCourse = fullCourseInfo.get(i);
+            CourseBasicInfo shortVer = basicInfos.get(i);
+            String courseName = curCourse.getCourseName();
+            Integer courseId = curCourse.getCourseId();
+
+            assertTrue(courseName.equals(shortVer.getCourseName()));
+            assertTrue(courseId == shortVer.getCourseId());
+        }
+    }
+
+    /**
+     * Tests the get course from course id function.
+     * @author Misael Guijarro
+     */
+    @Test
+    public void getCourseFromId(){
+        User user = new User("courseIdTester", "courseId");
+        userDao.insert(user);
+
+        Course c1 = new Course("example1", user.getId());
+        Course c2 = new Course("example2", user.getId());
+        Course c3 = new Course("example3", user.getId());
+        courseDao.insert(c1);
+        courseDao.insert(c2);
+        courseDao.insert(c3);
+        List<Course> fullCourseInfo = courseDao.getUserCourses(user.getId());
+
+        for(Course course : fullCourseInfo) {
+            Course queriedCourse = courseDao.getCourseFromId(course.getCourseId());
+            assertEquals(queriedCourse, course);
+        }
+    }
 }
