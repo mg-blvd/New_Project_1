@@ -1,7 +1,5 @@
 package com.example.cst438_project1.DbFiles;
 
-import android.util.Pair;
-
 import java.util.List;
 
 import androidx.room.Dao;

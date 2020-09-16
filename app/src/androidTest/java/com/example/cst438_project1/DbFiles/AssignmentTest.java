@@ -46,4 +46,39 @@ public class AssignmentTest {
         Integer x = 999;
         assertEquals(x, assignment.getStudentId());
     }
+
+    /**
+     * Testing name setter
+     * @author Misael Guijarro
+     */
+    @Test
+    public void setAssignmentName() {
+        Assignment assignment = new Assignment("Homework", 50.0, 100.0, 777, 999);
+        assignment.setAssignmentName("Completed HW");
+        assertEquals("Completed HW", assignment.getAssignmentName());
+    }
+
+    /**
+     * testing score setter
+     * @author Misael Guijarro
+     */
+    @Test
+    public void setAssignmentScore() {
+        Assignment assignment = new Assignment("Homework", 50.0, 100.0, 777, 999);
+        assignment.setMaxScore(5.5);
+        assertEquals(5.5, (double) assignment.getMaxScore(), 0.0002);
+    }
+
+    /**
+     * testing max score setter
+     * @author Misael Guijarro
+     */
+    @Test
+    public void setAssignmentMaxScore() {
+        Assignment assignment = new Assignment("Homework", 50.0, 100.0, 777, 999);
+        assignment.setMaxScore(5.5);
+        assertEquals(5.5, (double) assignment.getMaxScore(), 0.0002);
+    }
+
+
 }
