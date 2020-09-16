@@ -157,6 +157,16 @@ public class UpdateAssignment extends AppCompatActivity {
         currentAssignment.setScore(Double.parseDouble(assignGot.getText().toString()));
         currentAssignment.setMaxScore(Double.parseDouble(assignTotal.getText().toString()));
         mAssignmentDao.update(currentAssignment);
+
+        //Update Course Grade
+        updateCourseAfterAssignment();
+    }
+
+    public void updateCourseAfterAssignment() {
+        int courseId = currentAssignment.getCourseId();
+        Course getCourse = mCourseDao.getCourseFromId(courseId);
+        List<Assignment> assignments = mAssignmentDao.getUserSpecificCourseAssignments(id, courseId);
+        Utility.recalculateGrade(getCourse, assignments, mCourseDao);
     }
 
     // Gets view attributes and gives them functionality

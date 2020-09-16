@@ -25,4 +25,5 @@ public interface AssignmentDao {
 
     @Query("SELECT * from assignment_table WHERE studentId = :userId AND courseId = :courseId")
     List<Assignment> getUserSpecificCourseAssignments(Integer userId, Integer courseId);
+
 }
