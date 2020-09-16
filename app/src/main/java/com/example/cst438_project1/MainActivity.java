@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView homeView;
     EditText userName;
-    EditText passWord; /// for the sake of convention!
+    EditText passWord;
 
     Button logIn;
     Button signUp;
@@ -47,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
         get_screen();
     }
 
+    // Creates toasts from the str input
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
+    // Checks if the user exists based on username and password
     public void check_exists(){
         User user = mUserDao.getUserWithUsername(userName.getText().toString());
         if(user == null){
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Moves the view to the Logged In screen
     public void to_logged_in(int userId){
         Intent intent = LoggedInHome.LoggedInIntent(MainActivity.this, userId);
         Log.i("Moving view","From Main to LoggedIn");
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Gets view attributes and attaches functionality
     public void get_screen(){
         homeView = findViewById(R.id.homeView);
         userName = findViewById(R.id.userName);

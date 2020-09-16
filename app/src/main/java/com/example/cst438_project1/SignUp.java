@@ -40,6 +40,7 @@ public class SignUp extends AppCompatActivity {
         get_screen();
     }
 
+    // Determines whether the incoming user can not be queried, see if user is unique
     public boolean is_unique(){
         if(mUserDao.getUserWithUsername(userName.getText().toString()) == null){
             return true;
@@ -47,12 +48,14 @@ public class SignUp extends AppCompatActivity {
         return false;
     }
 
+    // Moves the view to the Main activity
     public void return_home(){
         Intent intent = new Intent(SignUp.this, MainActivity.class);
         startActivity(intent);
         Log.i("Moving view", "From Sign Up to Main");
     }
 
+    // Determines if the user's inputs are valid for user creation
     public boolean input_check(){
         if(userName.getText().toString().length() < 4 || passWord.getText().toString().length() < 4){
             signUpText.setText("Please make sure there are at least four characters in each field");
@@ -67,16 +70,19 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    // Adds the user to the database
     public void insert_user(){
         User user = new User(userName.getText().toString(), passWord.getText().toString());
         mUserDao.insert(user);
         Log.i("Made Item", "Made user");
     }
 
+    // Creates toasts based on the string
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
+    // Gets the view attributes and attaches functionality
     public void get_screen(){
         signUpText = findViewById(R.id.signUpText);
         userName = findViewById(R.id.userName);
@@ -87,11 +93,11 @@ public class SignUp extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // check if user can sign up and what not
+                // check if user can sign up
                 if(input_check()){
                     insert_user();
                     toast_maker("Welcome, " + userName.getText().toString());
-                    return_home(); // then we goes back to the Main
+                    return_home(); // then we go back to the Main activity
                 }
 
             }
