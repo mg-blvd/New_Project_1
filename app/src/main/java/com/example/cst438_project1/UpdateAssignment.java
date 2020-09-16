@@ -196,7 +196,7 @@ public class UpdateAssignment extends AppCompatActivity {
         spinnerCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                toast_maker("something selected!"+ Integer.toString(i)); // i here is the index value
+                toast_maker("Something selected! #"+ Integer.toString(i)); // i here is the index value
                 Log.i("The name of the course is ", coursesNames.get(i) + " which is at index " + Integer.toString(i));
                 Log.i("On courses it is ", courses.get(i).getCourseName()); // they are the same, just needed to make sure
 
