@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateAssignment extends AppCompatActivity {
-    private static final String UPDATE_ASSIGNMENT_ID = "com.example.cst438_project1.UpdateAssignment";
+    public static final String UPDATE_ASSIGNMENT_ID = "com.example.cst438_project1.UpdateAssignment";
 
     int id; // The current user's Id
 
@@ -142,9 +142,9 @@ public class UpdateAssignment extends AppCompatActivity {
         assignTotal.setText(Double.toString(currentAssignment.getMaxScore()));
     }
 
-    // Checks if the user has assignments to access
-    public boolean check_if_possible(){
-        if(currentAssignment == null){
+    // Checks if the user has an assignment to access
+    public boolean check_if_possible(Assignment current){
+        if(current == null){
             toast_maker("Sorry no assignment is available");
             return false;
         }
@@ -217,7 +217,7 @@ public class UpdateAssignment extends AppCompatActivity {
         assignUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(check_if_possible()){
+                if(check_if_possible(currentAssignment)){
                     updateAssignment();
                     toast_maker("Assignment has being updated!");
                     to_logged_in_screen(id);

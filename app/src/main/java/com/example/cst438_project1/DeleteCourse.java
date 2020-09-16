@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class DeleteCourse extends AppCompatActivity {
-    private static final String DELETE_COURSE_ID = "com.example.cst438_project1.DeleteCourse";
+    public static final String DELETE_COURSE_ID = "com.example.cst438_project1.DeleteCourse";
 
     int id; // The current user's id
 
