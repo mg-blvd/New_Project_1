@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteAssignment extends AppCompatActivity {
-    private static final String DELETE_ASSIGNMENT_ID = "com.example.cst438_project1.DeleteAssignment";
+    public static final String DELETE_ASSIGNMENT_ID = "com.example.cst438_project1.DeleteAssignment";
     int id; //student ID we get from the intent
     CourseDao mCourseDao;
     AssignmentDao mAssignmentDao;
@@ -265,7 +265,7 @@ public class DeleteAssignment extends AppCompatActivity {
      * @param assignment - The assignment we want to delete
      * @author Misael Guijarro
      */
-    private void deleteAnAssignment(Assignment assignment) {
+    public void deleteAnAssignment(Assignment assignment) {
 
         int courseId = assignment.getCourseId();
         Course courseToModify = mCourseDao.getCourseFromId(courseId);
