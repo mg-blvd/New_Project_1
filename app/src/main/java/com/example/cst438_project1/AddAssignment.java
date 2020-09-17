@@ -33,6 +33,7 @@ import java.util.List;
  * </p>
  * @see androidx.appcompat.app.AppCompatActivity
  * @see android.widget.AdapterView.OnItemSelectedListener
+ * @author Ryan Proctor
  */
 public class AddAssignment extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String ADD_ASSIGNMENT_ID = "com.example.cst438_project1.AddAssignment";

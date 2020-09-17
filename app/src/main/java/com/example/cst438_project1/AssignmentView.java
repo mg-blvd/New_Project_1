@@ -23,6 +23,7 @@ import java.util.List;
  *     Displays the course's assignments in a RecyclerView with their names and letter grades.
  * </p>
  * @see androidx.appcompat.app.AppCompatActivity
+ * @author Ryan Proctor
  */
 public class AssignmentView extends AppCompatActivity {
     private List<Assignment> mAssignments;

@@ -23,6 +23,7 @@ import com.example.cst438_project1.DbFiles.StudentDatabase;
  *     Creates a new course for the user to add assignments.
  * </p>
  * @see androidx.appcompat.app.AppCompatActivity
+ * @author Ryan Proctor
  */
 public class AddCourse extends AppCompatActivity {
     private static final String ADD_COURSE_ID = "com.example.cst438_project1.AddCourse";

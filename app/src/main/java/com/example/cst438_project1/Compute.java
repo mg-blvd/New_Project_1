@@ -27,6 +27,7 @@ import java.util.List;
  *     and grades.
  * </p>
  * @see androidx.appcompat.app.AppCompatActivity
+ * @author Ryan Proctor
  */
 public class Compute extends AppCompatActivity {
     private static final String COMPUTE_ID = "com.example.cst438_project1.Compute";
