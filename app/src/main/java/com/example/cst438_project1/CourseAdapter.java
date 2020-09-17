@@ -22,6 +22,7 @@ import java.util.List;
  * </p>
  * @see androidx.recyclerview.widget.RecyclerView
  * @see androidx.recyclerview.widget.RecyclerView.Adapter
+ * @author Ryan Proctor
  */
 //!!Recycler View code template derived from https://guides.codepath.com/android/using-the-recyclerview!!
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{

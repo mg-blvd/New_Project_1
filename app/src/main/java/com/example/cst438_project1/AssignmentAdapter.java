@@ -21,6 +21,7 @@ import java.util.List;
  * </p>
  * @see androidx.recyclerview.widget.RecyclerView
  * @see androidx.recyclerview.widget.RecyclerView.Adapter
+ * @author Ryan Proctor
  */
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
     private List<Assignment> mAssignments;
