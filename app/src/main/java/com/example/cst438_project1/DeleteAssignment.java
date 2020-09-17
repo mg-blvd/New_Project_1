@@ -244,7 +244,7 @@ public class DeleteAssignment extends AppCompatActivity {
                 //If so, we delete the assignment and go back to the logged in page
                 toast_maker("Assignment was deleted");
                 deleteAnAssignment(pickedAssignment);
-                Intent intent = LoggedInHome.LoggedInIntent(getParent(), id);
+                Intent intent = LoggedInHome.LoggedInIntent(DeleteAssignment.this, id);
                 startActivity(intent);
             }
         });
