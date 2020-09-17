@@ -13,7 +13,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class DeleteCourseInstrumentedTest {
 
-    // For the intent
+    /**
+     * Simple test for the intent of delete course
+     * @author Jonathan Quintero
+     */
     @Test
     public void delete_course_incoming(){
         int intended_id = 2;

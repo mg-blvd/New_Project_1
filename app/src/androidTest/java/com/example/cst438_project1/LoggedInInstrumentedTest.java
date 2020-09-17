@@ -12,9 +12,13 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class LoggedInInstrumentedTest {
-    // For the intent test.
+
+    /**
+     * Simple test for the intent of Logged In activity
+     * @author Jonathan Quintero
+     */
     @Test
-    public void intentTest(){
+    public void logged_in_intent_test(){
         int intended = 2;
         Context app = InstrumentationRegistry.getInstrumentation().getTargetContext();
         int test_id = LoggedInHome.LoggedInIntent(app, 2).getIntExtra(LoggedInHome.LOGGED_IN_ID, -1);

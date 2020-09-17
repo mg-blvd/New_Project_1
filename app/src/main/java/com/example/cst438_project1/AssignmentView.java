@@ -17,6 +17,14 @@ import com.example.cst438_project1.DbFiles.StudentDatabase;
 
 import java.util.List;
 
+/**
+ * <h1>Assignment View</h1>
+ * <p>
+ *     Displays the course's assignments in a RecyclerView with their names and letter grades.
+ * </p>
+ * @see androidx.appcompat.app.AppCompatActivity
+ * @author Ryan Proctor
+ */
 public class AssignmentView extends AppCompatActivity {
     private List<Assignment> mAssignments;
     int courseID, studentID;
@@ -25,6 +33,10 @@ public class AssignmentView extends AppCompatActivity {
     TextView courseName;
     Button back;
 
+    /**
+     * Sets up the activity and sets up the DAO, assigns the GUI elements and calls the getScreen() method
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +53,9 @@ public class AssignmentView extends AppCompatActivity {
         getScreen();
     }
 
+    /**
+     * Sets up the RecyclerView and gets the student and course ID from the application intent.
+     */
     public void getScreen() {
         Intent intent = getIntent();
         studentID = intent.getIntExtra("studentID", -1);

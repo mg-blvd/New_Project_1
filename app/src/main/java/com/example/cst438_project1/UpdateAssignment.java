@@ -72,19 +72,31 @@ public class UpdateAssignment extends AppCompatActivity {
         get_screen();
     }
 
-    // Creates toasts from String
+    /**
+     *  Creates toasts from String
+     * @param str - string that the user will see
+     * @author Jonathan Quintero
+     */
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
-    // Changes view to the Logged In Activity
+    /**
+     * Changes view to the Logged In Activity
+     * @param userId - the current user's id needs to be passed on
+     * @author Jonathan Quintero
+     */
     public void to_logged_in_screen(int userId){
         Intent intent = LoggedInHome.LoggedInIntent(UpdateAssignment.this, userId);
         Log.i("Moving view","From UpdateAssignment to LoggedIn");
         startActivity(intent);
     }
 
-    // Populates the courses spinner based on the user's id
+    /**
+     *  Populates the courses spinner based on the user's id
+     * @param id - the id of the current user is used to query with
+     * @author Jonathan Quintero
+     */
     public void populate_courses(int id){
         coursesNames = new ArrayList<String>();
         courses = mCourseDao.getUserCourses(id);
@@ -108,7 +120,12 @@ public class UpdateAssignment extends AppCompatActivity {
         }
     }
 
-    // Populates the assignments spinner
+    /**
+     *  Populates the assignments spinner
+     * @param userId - the current user's id used for querying
+     * @param courseId - the selected course's id used for querying
+     * @author Jonathan Quintero
+     */
     public void populate_assignments(int userId, int courseId){
         assignmentsNames = new ArrayList<String>();
         assignments = mAssignmentDao.getUserSpecificCourseAssignments(userId, courseId);
@@ -130,19 +147,31 @@ public class UpdateAssignment extends AppCompatActivity {
 
     }
 
-    // Updates the assignment chosen
+    /**
+     *  Updates the assignment chosen
+     * @param assignment - the assignment that was chosen to modify from
+     * @author Jonathan Quintero
+     */
     public void set_current_assignment(Assignment assignment){
         currentAssignment = assignment;
     }
 
-    // Populates the edit fields for the user to update
+    /**
+     *  Populates the edit fields for the user to update
+     * @author Jonathan Quintero
+     */
     public void set_edits(){
         assignName.setText(currentAssignment.getAssignmentName());
         assignGot.setText(Double.toString(currentAssignment.getScore()));
         assignTotal.setText(Double.toString(currentAssignment.getMaxScore()));
     }
 
-    // Checks if the user has an assignment to access
+    /**
+     * Checks if the user has an assignment to access
+     * @param current - assignment object checked for value
+     * @return - determines whether there is an assignment(true) to edit or not(false)
+     * @author Jonathan Quintero
+     */
     public boolean check_if_possible(Assignment current){
         if(current == null){
             toast_maker("Sorry no assignment is available");
@@ -151,7 +180,10 @@ public class UpdateAssignment extends AppCompatActivity {
         return true;
     }
 
-    // Updates the assignment object based on the user's edited fields
+    /**
+     *  Updates the assignment object based on the user's edited fields
+     * @author Jonathan Quintero
+     */
     public void updateAssignment(){
         currentAssignment.setAssignmentName(assignName.getText().toString());
         currentAssignment.setScore(Double.parseDouble(assignGot.getText().toString()));
@@ -162,6 +194,10 @@ public class UpdateAssignment extends AppCompatActivity {
         updateCourseAfterAssignment();
     }
 
+    /**
+     * Function used to update the grade of the course's assignment
+     * @author Misael Guijarro
+     */
     public void updateCourseAfterAssignment() {
         int courseId = currentAssignment.getCourseId();
         Course getCourse = mCourseDao.getCourseFromId(courseId);
@@ -169,7 +205,10 @@ public class UpdateAssignment extends AppCompatActivity {
         Utility.recalculateGrade(getCourse, assignments, mCourseDao);
     }
 
-    // Gets view attributes and gives them functionality
+    /**
+     *  Gets view attributes and gives them functionality
+     * @author Jonathan Quintero
+     */
     public void get_screen(){
         updateAssignmentText = findViewById(R.id.updateAssignmentText);
         assignName = findViewById(R.id.assignmentName);
@@ -238,7 +277,13 @@ public class UpdateAssignment extends AppCompatActivity {
 
     }
 
-    // The current activity's intent
+    /**
+     * The current activity's intent
+     * @param context - the activity calling the intent
+     * @param userId - the current user's id
+     * @return - intent that moves the current activity to this one
+     * @author Jonathan Quintero
+     */
     public static Intent UpdateAssignmentIntent(Context context, int userId){
         Intent intent = new Intent(context, UpdateAssignment.class);
         intent.putExtra(UPDATE_ASSIGNMENT_ID, userId);
