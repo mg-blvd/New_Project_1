@@ -63,19 +63,30 @@ public class DeleteCourse extends AppCompatActivity {
 
     }
 
-    // Creates toasts with str
+    /**
+     * Creates toasts with str
+     * @param str - string that the user will see
+     * @author Jonathan Quintero
+     */
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
-    // Changes view to the Logged In view
+    /**
+     *  Changes view to the Logged In view
+     * @param userId - the current user's id must be passed on
+     * @author Jonathan Quintero
+     */
     public void to_logged_in_screen(int userId){
         Intent intent = LoggedInHome.LoggedInIntent(DeleteCourse.this, userId);
         Log.i("Moving view","From DeleteCourse to LoggedIn");
         startActivity(intent);
     }
 
-    // Populates the public courses spinner based on user's id
+    /**
+     *  Populates the public courses spinner based on user's id
+     * @author Jonathan Quintero
+     */
     public void populate_spinner(){
         items = new ArrayList<String>();
         courses = mCourseDao.getUserCourses(id);
@@ -102,17 +113,31 @@ public class DeleteCourse extends AppCompatActivity {
 
     }
 
-    // Will return the index of the selected value
+    /**
+     *  Will return the index of the selected value
+     * @return - an integer with the index chosen from the course's spinner
+     * @author Jonathan Quintero
+     */
     public int get_dropdown_value(){
         return spinner.getSelectedItemPosition();
     }
 
-    // Will return the Id of the course
+    /**
+     *  Will return the Id of the course
+     * @param val - index of the chosen course from spinner
+     * @return - the id of the chosen course
+     * @author Jonathan Quintero
+     */
     public int get_course_id(int val){
         return courses.get(val).getCourseId();
     }
 
-    // Will delete all assignments related to the course being deleted
+    /**
+     *  Will delete all assignments related to the course being deleted
+     * @param userId - the current user's id
+     * @param courseId - the chosen course's id
+     * @author Jonathan Quintero
+     */
     public void delete_assignments(int userId, int courseId){
         List<Assignment> assignments = mAssignmentDao.getUserSpecificCourseAssignments(userId, courseId);
 
@@ -122,13 +147,20 @@ public class DeleteCourse extends AppCompatActivity {
         toast_maker("Deleted all related assignments");
     }
 
-    // Deletes the wanted course from the spinner option
+    /**
+     *  Deletes the wanted course from the spinner option
+     * @param index - index of the chosen course's spinner
+     * @author Jonathan Quintero Ramos
+     */
     public void delete_course(int index){
         mCourseDao.delete(courses.get(index));
         toast_maker("Deleted the course");
     }
 
-    // Obtains all attributes from the view and attaches corresponding functionality
+    /**
+     *  Obtains all attributes from the view and attaches corresponding functionality
+     * @author Jonathan Quintero
+     */
     public void get_screen(){
         deleteCourseText = findViewById(R.id.deleteCourseText);
 
@@ -160,7 +192,13 @@ public class DeleteCourse extends AppCompatActivity {
 
     }
 
-    // The intent for the current activity
+    /**
+     *  The intent for the current activity
+     * @param context - activity calling on the intent
+     * @param userId - current user's id must be passed on
+     * @return - intent that moves from the current activity to this one
+     * @author Jonathan Quintero Ramos
+     */
     public static Intent DeleteCourseIntent(Context context, int userId){
         Intent intent = new Intent(context, DeleteCourse.class);
         intent.putExtra(DELETE_COURSE_ID, userId);

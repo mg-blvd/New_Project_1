@@ -13,7 +13,11 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class UpdateAssignmentInstrumentedTest {
 
-    // For the intent
+
+    /**
+     * Simple test for the intent of update assignment activity
+     * @author Jonathan Quintero
+     */
     @Test
     public void update_assignment_incoming(){
         int intended = 2;
