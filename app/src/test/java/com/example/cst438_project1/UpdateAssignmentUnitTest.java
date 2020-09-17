@@ -9,7 +9,10 @@ import static org.junit.Assert.assertEquals;
 public class UpdateAssignmentUnitTest {
     public UpdateAssignment updateAssignment;
 
-    // Tests whether an assignment exists
+    /**
+     * Testing whether update assignment can detect a null Assignment
+     * @author Jonathan Quintero
+     */
     @Test
     public void update_assignment_assignments_exist(){
         Assignment tester = new Assignment("testAssignment", 10.0, 10.0, 1, 1);

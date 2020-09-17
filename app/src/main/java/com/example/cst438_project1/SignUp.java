@@ -40,7 +40,11 @@ public class SignUp extends AppCompatActivity {
         get_screen();
     }
 
-    // Determines whether the incoming user can not be queried, see if user is unique
+    /**
+     *  Determines whether the incoming user can not be queried, see if user is unique
+     * @return a boolean identifying the username is a duplicate(false) or not(true)
+     * @author Jonathan Quintero
+     */
     public boolean is_unique(){
         if(mUserDao.getUserWithUsername(userName.getText().toString()) == null){
             return true;
@@ -48,14 +52,23 @@ public class SignUp extends AppCompatActivity {
         return false;
     }
 
-    // Moves the view to the Main activity
+    /**
+     *  Moves the view to the Main activity
+     * @author Jonathan Quintero
+     */
     public void return_home(){
         Intent intent = new Intent(SignUp.this, MainActivity.class);
         startActivity(intent);
         Log.i("Moving view", "From Sign Up to Main");
     }
 
-    // Determines if the user's inputs are valid for user creation
+    /**
+     * Determines if the user's inputs are valid for user creation
+     * @param username - the string username the user wants
+     * @param password - the string password the user wants
+     * @author Jonathan Quintero
+     */
+
     public boolean input_check(String username, String password){
         if(username.length() < 4 || password.length() < 4){
             signUpText.setText("Please make sure there are at least four characters in each field");
@@ -70,19 +83,28 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    // Adds the user to the database
+    /**
+     * Adds the user to the database
+     * @author Jonathan Quintero
+     */
     public void insert_user(){
         User user = new User(userName.getText().toString(), passWord.getText().toString());
         mUserDao.insert(user);
         Log.i("Made Item", "Made user");
     }
 
-    // Creates toasts based on the string
+    /**
+     *  Creates toasts based on the string
+     * @param str - string that the user will see in toast
+     */
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
-    // Gets the view attributes and attaches functionality
+    /**
+     *  Gets the view attributes and attaches functionality
+     * @author Jonathan Quintero
+     */
     public void get_screen(){
         signUpText = findViewById(R.id.signUpText);
         userName = findViewById(R.id.userName);
