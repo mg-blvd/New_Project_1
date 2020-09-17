@@ -25,6 +25,15 @@ import com.example.cst438_project1.DbFiles.StudentDatabase;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <h1>Add Assignment</h1>
+ * <p>
+ *     The student adds a custom assignment with a name, score earned, and the maximum score and
+ *     adds the assignment to an existing course.
+ * </p>
+ * @see androidx.appcompat.app.AppCompatActivity
+ * @see android.widget.AdapterView.OnItemSelectedListener
+ */
 public class AddAssignment extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String ADD_ASSIGNMENT_ID = "com.example.cst438_project1.AddAssignment";
     private List<Course> mCourses;
@@ -41,6 +50,10 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
     Button confirm;
     Spinner courseSpinner;
 
+    /**
+     * Sets up the activity and sets up the DAOs and calls the get_screen() method
+     * @param savedInstanceState Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +72,30 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
         get_screen();
     }
 
+    /**
+     * Makes a simple pop-up toast message with a provided string or variables converted to
+     * string.
+     * @param str String
+     */
     public void toast_maker(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Transfers the user back to the home screen.
+     * @param userId int: ID of the current active user
+     */
     public void to_logged_in_screen(int userId){
         Intent intent = LoggedInHome.LoggedInIntent(AddAssignment.this, userId);
         Log.i("Moving view","From AddAssignment to LoggedIn");
         startActivity(intent);
     }
 
+    /**
+     * Sets up the screen by associating the Spinner, Buttons, and the EditTexts with their
+     * respective GUI elements. It also populates the Spinner with course names and gets the
+     * assignment ID through the application intent.
+     */
     public void get_screen() {
         addAssignmentText = findViewById(R.id.addAssignmentText);
 
@@ -127,26 +154,51 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+    /**
+     * Converts numbers in the text to a double.
+     * @param text EditText: Text the user provided in the associated EditText.
+     * @return The number in the string as a double.
+     */
     public Double textToDouble(EditText text) {
         String str = text.getText().toString();
         Double dou = Double.parseDouble(str);
         return dou;
     }
 
+    /**
+     * Converts the text in the provided EditText to string
+     * @param text EditText: The EditText field to be converted
+     * @return The text as String
+     */
     public String textToString(EditText text) {
         return text.getText().toString();
     }
 
+    /**
+     * Checks if the EditText field is empty or has no input.
+     * @param text EditText
+     * @return A boolean state if the field is empty
+     */
     public boolean isEmpty(EditText text) {
         return text.getText().toString().matches("");
     }
 
+    /**
+     * Gets the current intent and passes the user ID to a different activity
+     * @param context Context: Context of the app
+     * @param userId int: ID of current active user
+     * @return Intent
+     */
     public static Intent AddAssignmentIntent(Context context, int userId) {
         Intent intent = new Intent(context, AddAssignment.class);
         intent.putExtra(ADD_ASSIGNMENT_ID, userId);
         return intent;
     }
 
+    /**
+     * Acquires the Courses from the course list and retrieves all the course names.
+     * @return A String array of course names
+     */
     public String[] getCourseNames() {
         String names[] = new String[mCourses.size()];
         for (int i = 0; i < names.length; i++)
@@ -154,6 +206,11 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
         return names;
     }
 
+    /**
+     * Gets a Course object from its associated course ID.
+     * @param courseID int: The ID of the requested course.
+     * @return A single Course object if found, otherwise null.
+     */
     public Course getCourse(int courseID) {
         Course c = null;
         for (int i = 0; i < mCourses.size(); i++)
@@ -164,6 +221,16 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
         return c;
     }
 
+    /**
+     * When the user enters the information in other required fields and taps the "Add Assignment"
+     * button, it retrieves the course ID from the course list to apply the ID to the new assignment
+     * for association.
+     * @param adapterView AdapterView&lt&gt: The Spinner where the course was selected
+     * @param view View: The View within the Spinner
+     * @param position int: The indexed position in the Spinner
+     * @param l long: The row ID for the current selection
+     * @see android.widget.AdapterView.OnItemSelectedListener
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         for (int i = 0; i < mCourses.size(); i++)
@@ -173,6 +240,10 @@ public class AddAssignment extends AppCompatActivity implements AdapterView.OnIt
             }
     }
 
+    /**
+     * Not used, supposed to be invoked when the selection disappears from view
+     * @param adapterView AdapterView&lt&gt: The Spinner with no selected item
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
